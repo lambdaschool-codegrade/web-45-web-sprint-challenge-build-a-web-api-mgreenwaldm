@@ -38,25 +38,25 @@ function get(id) {
 
 function insert(project) {
   return db("projects")
-    .insert(project)
-    .then(([id]) => get(id));
+      .insert(project)
+      .then(([id]) => get(id));
 }
 
 function update(id, changes) {
   return db("projects")
-    .where("id", id)
-    .update(changes)
-    .then(count => (count > 0 ? get(id) : null));
+      .where("id", id)
+      .update(changes)
+      .then(count => (count > 0 ? get(id) : null));
 }
 
 function remove(id) {
   return db("projects")
-    .where("id", id)
-    .del();
+      .where("id", id)
+      .del();
 }
 
 function getProjectActions(projectId) {
   return db("actions")
-    .where("project_id", projectId)
-    .then(actions => actions.map(action => mappers.actionToBody(action)));
+      .where("project_id", projectId)
+      .then(actions => actions.map(action => mappers.actionToBody(action)));
 }

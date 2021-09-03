@@ -14,15 +14,15 @@ function get(id) {
 
   if (id) {
     return query
-      .where('id', id)
-      .first()
-      .then((action) => {
-        if (action) {
-          return mappers.actionToBody(action);
-        } else {
-          return null;
-        }
-      });
+        .where('id', id)
+        .first()
+        .then((action) => {
+          if (action) {
+            return mappers.actionToBody(action);
+          } else {
+            return null;
+          }
+        });
   } else {
     return query.then((actions) => {
       return actions.map((action) => mappers.actionToBody(action));
@@ -32,15 +32,15 @@ function get(id) {
 
 function insert(action) {
   return db('actions')
-    .insert(action)
-    .then(([id]) => get(id));
+      .insert(action)
+      .then(([id]) => get(id));
 }
 
 function update(id, changes) {
   return db('actions')
-    .where('id', id)
-    .update(changes)
-    .then((count) => (count > 0 ? get(id) : null));
+      .where('id', id)
+      .update(changes)
+      .then((count) => (count > 0 ? get(id) : null));
 }
 
 function remove(id) {
